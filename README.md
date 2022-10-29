@@ -1,7 +1,7 @@
 > ## Input > UI design
->> <img src="Input - UI design.jpg">
+>> <img src="UI design - Input">
 
 ---
 
 > ## Output > UI design
->> <img src="Output - UI design.jpg">
+>> <img src="UI design - Output">
