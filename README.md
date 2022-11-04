@@ -7,6 +7,9 @@
 > | :-: | :-: | :-: | :-: | :-: |
 > | 20191701016 | 20191701269 | 20191701116 | 20191701163 | 20191701121 |
 
+> | <a href="Model.ipynb">Model</a> | <a href="GUI.ipynb">GUI</a> | <a href="penguins.csv">Dataset</a> | <a href="Task Description.pdf">Description</a> |
+> | :-: | :-: | :-: | :-: |
+
 > | Input: UI design | Output: UI design |
 > | :-: | :-: |
 > | <img src="UI design - Input.jpg"> | <img src="UI design - Output.jpg"> |
