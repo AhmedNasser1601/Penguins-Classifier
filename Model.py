@@ -6,12 +6,12 @@
 
 import sys
 import json
-import random
-
 import numpy as np
 import pandas as pd
-import matplotlib.pyplot as plt
+import matplotlib.pyplot as plt 
 import seaborn as sns
+
+import preReq
 
 
 # In[2]:
@@ -19,20 +19,29 @@ import seaborn as sns
 
 df = pd.read_csv('penguins.csv')
 df
-W = [random.random(),random.random()]
 
-def signum(V):
-    if V>=0:
-        return 1
-    else:
-        return 0
 
-def Model(eboch,x,b,eta):
-    for i in range(eboch):
-        y_i =signum(np.dot(W[i].T,x[i])+b)
-        if y_i != t_i:
-            Loss = (t_i-y_i)
-            W[i+1] = W[i]+np.dot((np.dot(eta,Loss)),x[i])
-        else:
-            continue
+# In[3]:
+
+
+print(preReq.INarr)
+
+
+# In[4]:
+
+
+preReq.OUTarr[0] = 1
+preReq.OUTarr[1] = 2
+preReq.OUTarr[2] = 3
+preReq.OUTarr[3][0] = 41
+preReq.OUTarr[3][1] = 42
+preReq.OUTarr[3][2] = 43
+preReq.OUTarr[3][3] = 44
+preReq.OUTarr[4] = 5
+
+
+# In[5]:
+
+
+print("\t\tModel Executed Successfully")
 
