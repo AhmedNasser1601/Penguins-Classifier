@@ -14,4 +14,4 @@
 
 > | Input: UI design | Output: UI design |
 > | :-: | :-: |
-> | <img src="UI design - Input.jpg"> | <img src="UI design - Output.jpg"> |
+> | ![UI design - Input](https://user-images.githubusercontent.com/60184582/200174611-b48d75d5-d6f9-4e6a-bab5-cefc807fe59f.jpg) | ![UI design - Output](https://user-images.githubusercontent.com/60184582/200174612-72198f8f-3b4f-468e-9fa1-214e45c49de4.jpg) |
