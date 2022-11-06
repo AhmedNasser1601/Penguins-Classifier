@@ -1,12 +1,14 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import os
 import sys
 import json
+import numpy as np
+import pandas as pd
+import random
+import matplotlib.pyplot as plt 
+import seaborn as sns
+from sklearn.model_selection import train_test_split
+from sklearn.preprocessing import LabelEncoder
+from sklearn import preprocessing
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
@@ -15,29 +17,18 @@ from tkinter import Canvas
 import preReq
 
 
-# ---
-# ### Input Part
 
-# In[2]:
-
-
+# Input Part
 Top = tk.Tk()
 Top.title("Penguins-Classifier-Perceptron")
 Top.geometry('1000x500')
 Top.resizable(0, 0)
-
-
-# In[3]:
-
 
 Input_lbl = tk.Label(Top, text='Input', font=('Times New Roman', 27), foreground="#a52a2a")
 Input_lbl.place(x=130, y=1)
 
 Output_lbl = tk.Label(Top, text='Output', font=('Times New Roman', 27), foreground="#a52a2a")
 Output_lbl.place(x=630, y=1)
-
-
-# In[4]:
 
 
 Feature1_lbl = tk.Label(Top, text='Select 1st Feature', font=('Verdana', 12), foreground="Blue")
@@ -58,9 +49,6 @@ Feature2.current()
 Feature2.place(x=200, y=100)
 
 
-# In[5]:
-
-
 Class1_lbl = tk.Label(Top, text='Select 1st Class', font=('Verdana', 12), foreground="Blue")
 Class1_lbl.place(x=10, y=160)
 
@@ -79,17 +67,11 @@ Class2.current()
 Class2.place(x=200, y=200)
 
 
-# In[6]:
-
-
 eta_lbl = tk.Label(Top, text='Enter eta value', font=('Verdana', 12), foreground="Blue")
 eta_lbl.place(x=10, y=260)
 
 eta = tk.Entry(Top, font=('Verdana', 10), foreground="Blue", width=10)
 eta.place(x =200, y=260)
-
-
-# In[7]:
 
 
 ebochs_lbl = tk.Label(Top,text='Enter no. of ebochs', font=('Verdana', 12), foreground="Blue")
@@ -99,15 +81,9 @@ ebochs = tk.Entry(Top, font=('Verdana', 10), foreground="Blue", width=10)
 ebochs.place(x=200, y=300)
 
 
-# In[8]:
-
-
 CheckBias = tk.IntVar()
 Bias = tk.Checkbutton(Top, text="Bias", variable=CheckBias, onvalue=1, offvalue=0, font=('Verdana', 20, 'bold'), foreground="Orange")
 Bias.place(x=50, y=360)
-
-
-# In[9]:
 
 
 def PredictFn():
@@ -135,26 +111,11 @@ ExitBTN.place(x=90, y=430)
 PredictBTN = tk.Button(Top, text="Run", font=('Verdana', 15, 'bold'), bg="green", foreground="yellow", command=PredictFn)
 PredictBTN.place(x=210, y=430)
 
-
-# In[10]:
-
-
 canvas = Canvas(Top, width=5, height=500)
 for x in range(5):
     canvas.create_line(x, 0, x, 500, fill="#a52a2a")
 canvas.place(x=380, y=0)
-
-
-# In[11]:
-
-
 Top.mainloop()
-
-
-# ---
-# ### Output Part
-
-# In[12]:
 
 
 Top = tk.Tk()
@@ -163,17 +124,11 @@ Top.geometry('1000x500')
 Top.resizable(0, 0)
 
 
-# In[13]:
-
-
 Input_lbl = tk.Label(Top, text='Input', font=('Times New Roman', 27), foreground="#a52a2a")
 Input_lbl.place(x=130, y=1)
 
 Output_lbl = tk.Label(Top, text='Output', font=('Times New Roman', 27), foreground="#a52a2a")
 Output_lbl.place(x=630, y=1)
-
-
-# In[14]:
 
 
 Feature1_lbl = tk.Label(Top, text='Select 1st Feature', font=('Verdana', 12), foreground="Blue")
@@ -196,9 +151,6 @@ Feature2.configure(state='disabled')
 Feature2.place(x=200, y=100)
 
 
-# In[15]:
-
-
 Class1_lbl = tk.Label(Top, text='Select 1st Class', font=('Verdana', 12), foreground="Blue")
 Class1_lbl.place(x=10, y=160)
 
@@ -219,9 +171,6 @@ Class2.configure(state='disabled')
 Class2.place(x=200, y=200)
 
 
-# In[16]:
-
-
 eta_lbl = tk.Label(Top, text='Enter eta value', font=('Verdana', 12), foreground="Blue")
 eta_lbl.place(x=10, y=260)
 
@@ -230,9 +179,6 @@ eta.configure(state='normal')
 eta.insert('end', preReq.INarr[4])
 eta.configure(state='disabled')
 eta.place(x =200, y=260)
-
-
-# In[17]:
 
 
 ebochs_lbl = tk.Label(Top,text='Enter no. of ebochs', font=('Verdana', 12), foreground="Blue")
@@ -245,9 +191,6 @@ ebochs.configure(state='disabled')
 ebochs.place(x=200, y=300)
 
 
-# In[18]:
-
-
 CheckBias = tk.IntVar()
 Bias = tk.Checkbutton(Top, text="Bias", variable=CheckBias, onvalue=1, offvalue=0, font=('Verdana', 20, 'bold'), foreground="Orange")
 if preReq.INarr[6]:
@@ -256,23 +199,14 @@ Bias.configure(state='disabled')
 Bias.place(x=50, y=360)
 
 
-# In[19]:
-
-
 ExitBTN = tk.Button(Top, text="Exit", font=('Verdana', 15, 'bold'), bg="red", foreground="yellow", command=ExitFn)
 ExitBTN.place(x=150, y=430)
-
-
-# In[20]:
 
 
 canvas = Canvas(Top, width=5, height=500)
 for x in range(5):
     canvas.create_line(x, 0, x, 500, fill="#a52a2a")
 canvas.place(x=380, y=0)
-
-
-# In[21]:
 
 
 pClass_lbl = tk.Label(Top, text='Predicted :', font=('Verdana', 12), foreground="orange")
@@ -285,9 +219,6 @@ pClass.configure(state='disabled')
 pClass.place(x=500, y=100)
 
 
-# In[22]:
-
-
 trainAcc_lbl = tk.Label(Top, text='Train Acc :', font=('Verdana', 12), foreground="orange")
 trainAcc_lbl.place(x=400, y=160)
 
@@ -298,9 +229,6 @@ trainAcc.configure(state='disabled')
 trainAcc.place(x=500, y=160)
 
 
-# In[23]:
-
-
 testAcc_lbl = tk.Label(Top, text='Test  Acc : ', font=('Verdana', 12), foreground="orange")
 testAcc_lbl.place(x=400, y=200)
 
@@ -309,9 +237,6 @@ testAcc.configure(state='normal')
 testAcc.insert('end', (preReq.OUTarr[2], '%'))
 testAcc.configure(state='disabled')
 testAcc.place(x=500, y=200)
-
-
-# In[24]:
 
 
 confMat_lbl = tk.Label(Top, text='Confusion\nMatrix', font=('Verdana', 12), foreground="orange")
@@ -341,9 +266,4 @@ confMat3.insert('end', (preReq.OUTarr[3][3]))
 confMat3.configure(state='disabled')
 confMat3.place(x=545, y=280)
 
-
-# In[25]:
-
-
 Top.mainloop()
-
