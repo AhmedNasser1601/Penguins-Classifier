@@ -37,7 +37,7 @@ def visualizeData(scaled_df):  # 10 combs
             plt.show()
 
 
-# visualizeData(scaled_df)
+visualizeData(scaled_df)
 
 
 # Main
