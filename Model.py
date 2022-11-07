@@ -128,3 +128,6 @@ preReq.OUTarr[3][0] = confMatTest[0][0]
 preReq.OUTarr[3][1] = confMatTest[0][1]
 preReq.OUTarr[3][2] = confMatTest[1][0]
 preReq.OUTarr[3][3] = confMatTest[1][1]
+
+preReq.train_data, preReq.train_target = train_data, train_target
+preReq.weight, preReq.bias = weight, bias
