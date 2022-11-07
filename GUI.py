@@ -91,16 +91,17 @@ def PredictFn():
         Top.destroy()
 
 
+PredictBTN = tk.Button(Top, text="Run", font=('Verdana', 15, 'bold'), bg="green", foreground="yellow",
+                       command=PredictFn)
+PredictBTN.place(x=210, y=400)
+
+
 def ExitFn():
     os._exit(1)
 
 
 ExitBTN = tk.Button(Top, text="Exit", font=('Verdana', 15, 'bold'), bg="red", foreground="yellow", command=ExitFn)
 ExitBTN.place(x=90, y=400)
-
-PredictBTN = tk.Button(Top, text="Run", font=('Verdana', 15, 'bold'), bg="green", foreground="yellow",
-                       command=PredictFn)
-PredictBTN.place(x=210, y=400)
 
 canvas = Canvas(Top, width=5, height=500)
 for x in range(5):
