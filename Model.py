@@ -1,19 +1,8 @@
-import os
-import sys
-import json
 import numpy as np
 import pandas as pd
-import random
-import matplotlib.pyplot as plt 
-import seaborn as sns
-from sklearn.model_selection import train_test_split
+import matplotlib.pyplot as plt
 from sklearn.preprocessing import LabelEncoder
 from sklearn import preprocessing
-import tkinter as tk
-from tkinter import ttk
-from tkinter import messagebox
-from tkinter import Canvas
-
 import preReq
 
 
@@ -48,10 +37,11 @@ def visualizeData(scaled_df):  # 10 combs
             plt.legend([preReq.Classes[0], preReq.Classes[1], preReq.Classes[2]])
             plt.show()
             
-visualizeData(scaled_df)
+#visualizeData(scaled_df)
 
 
 # Main
+
 misClass = [x for x in preReq.Classes if x not in selectedC]
 misFeatures = [x for x in preReq.Features if x not in selectedF]
 
@@ -70,12 +60,12 @@ train_data, train_target = all_train_data[:,:2], all_train_data[:, 2:]
 test_data, test_target = all_test_data[:,:2], all_test_data[:, 2:]
 
 
-def SignumFN(x):
-    return np.where(x>0, 1, -1)
+
 
 def PerceptronAlgo(weight, bias):
     for epoch in range(epochs):
-        yPredTrain = SignumFN((train_data.dot(weight.transpose()) + bias))
+        predict = (train_data.dot(weight.transpose()) + bias)
+        yPredTrain = np.where(predict>0, 1, -1)
         for i in range(len(train_target)):
             if yPredTrain[i] != train_target[i]:
                 loss = train_target[i] - yPredTrain[i]
@@ -95,11 +85,11 @@ classifyTrain()
 
 
 # Testing
-yPredTest = SignumFN((test_data.dot(weight.transpose()) + bias))
+ytest=(test_data.dot(weight.transpose()) + bias)
+yPredTest = np.where(ytest>0, 1, -1)
 
 def ConfuionMatrix(target, yPred):
     row = list()
-    testState = pd.DataFrame(columns=['Actual', 'Predicted', 'Match'])
     confMat = np.zeros([2, 2])
     
     for i in range(len(yPred)):
@@ -118,13 +108,13 @@ def ConfuionMatrix(target, yPred):
             else:
                 confMat[1][0] += 1
                 row.append([target[i], yPred[i], 'F'])
-    
-    print(testState.append(pd.DataFrame(row, columns=['Actual', 'Predicted', 'Match']), ignore_index=True))
+
     return ((np.trace(confMat)/np.sum(confMat))*100), confMat
 
 trainAcc, confMat = ConfuionMatrix(train_target, yPredTrain)
 testAcc, confMat = ConfuionMatrix(test_target, yPredTest)
-
+print("Training",trainAcc)
+print("Testing",testAcc)
 
 preReq.OUTarr[0] = selectedC[0] if sum(yPredTest) else selectedC[1]
 preReq.OUTarr[1] = trainAcc
