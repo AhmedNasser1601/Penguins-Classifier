@@ -46,13 +46,11 @@ misClass = list()
 for x in preReq.Classes:
     if x not in selectedC:
         misClass.append(x)
-# misClass = [x for x in preReq.Classes if x not in selectedC]
 
 misFeatures = list()
 for x in preReq.Features:
     if x not in selectedF:
         misFeatures.append(x)
-# misFeatures = [x for x in preReq.Features if x not in selectedF]
 
 scaled_df.drop(scaled_df.index[(scaled_df["species"] == misClass[0])], axis=0, inplace=True)
 scaled_df.drop(columns=misFeatures, axis=1, inplace=True)
@@ -82,15 +80,6 @@ def PerceptronAlgo(epochs, weight, bias, eta, train_data, train_target):
     return yPredTrain
 
 
-def classifyTrain():
-    plt.figure("Trained Features Figure")
-    plt.scatter(x=train_data[:, :1], y=train_data[:, 1:2], c=train_target)
-    plt.plot(np.array([0, 1]), np.array([(-bias) / weight[1], (-weight[0] - bias) / weight[1]]))
-    plt.show()
-
-
-# classifyTrain()
-
 yPredTrain = PerceptronAlgo(epochs, weight, bias, eta, train_data, train_target)
 
 # Testing
@@ -100,38 +89,41 @@ yPredTest = np.where(ytest > 0, 1, -1)
 
 def ConfuionMatrix(target, yPred):
     import numpy as np
+    import pandas as pd
 
-    row = list()
+    testCase = list()
     confMat = np.zeros([2, 2])
 
     for i in range(len(yPred)):
         if target[i] == 1:
             if yPred[i] == 1:
                 confMat[0][0] += 1
-                row.append([target[i], yPred[i], 'T'])
+                testCase.append([int(target[i][0]), yPred[i], '[*]'])
             else:
                 confMat[0][1] += 1
-                row.append([target[i], yPred[i], 'F'])
+                testCase.append([int(target[i][0]), yPred[i], '[ ]'])
 
         elif target[i] == -1:
             if yPred[i] == -1:
                 confMat[1][1] += 1
-                row.append([target[i], yPred[i], 'T'])
+                testCase.append([int(target[i][0]), yPred[i], '[*]'])
             else:
                 confMat[1][0] += 1
-                row.append([target[i], yPred[i], 'F'])
+                testCase.append([int(target[i][0]), yPred[i], '[ ]'])
 
-    return ((np.trace(confMat) / np.sum(confMat)) * 100), confMat
+    Cases = pd.DataFrame(testCase, columns=['Real', 'Pred', 'Match'])
+    return ((np.trace(confMat) / np.sum(confMat)) * 100), confMat, pd.DataFrame(Cases,
+                                                                                columns=['Real', 'Pred', 'Match'])
 
 
-trainAcc, confMatTrain = ConfuionMatrix(train_target, yPredTrain)
-testAcc, confMatTest = ConfuionMatrix(test_target, yPredTest)
-print("Training", trainAcc)
-print("Testing", testAcc)
+preReq.OUTarr[1], confMatTrain, truthValsTrain = ConfuionMatrix(train_target, yPredTrain)
+print('|> Truth Values for Training <|\n   Training Accuracy: ', preReq.OUTarr[1], '%\n', truthValsTrain, '\n',
+      '-' * 35)
+
+preReq.OUTarr[2], confMatTest, truthValsTest = ConfuionMatrix(test_target, yPredTest)
+print('|> Truth Values for Testing <|\n   Testing Accuracy: ', preReq.OUTarr[2], '%\n', truthValsTest, '\n', '-' * 35)
 
 preReq.OUTarr[0] = selectedC[0] if sum(yPredTest) else selectedC[1]
-preReq.OUTarr[1] = trainAcc
-preReq.OUTarr[2] = testAcc
 preReq.OUTarr[3][0] = confMatTest[0][0]
 preReq.OUTarr[3][1] = confMatTest[0][1]
 preReq.OUTarr[3][2] = confMatTest[1][0]
