@@ -84,7 +84,7 @@ def PredictFn():
         preReq.INarr[1] = Feature2.get()
         preReq.INarr[2] = Class1.get()
         preReq.INarr[3] = Class2.get()
-        preReq.INarr[4] = abs(int(eta.get()))
+        preReq.INarr[4] = abs(float(eta.get()))
         preReq.INarr[5] = abs(int(ebochs.get()))
         preReq.INarr[6] = CheckBias.get()
         exec(open('Model.py').read())
