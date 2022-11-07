@@ -82,14 +82,6 @@ def PerceptronAlgo(epochs, weight, bias, eta, train_data, train_target):
     return yPredTrain
 
 
-def classifyTrain():
-    plt.figure("Trained Features Figure")
-    plt.scatter(x=train_data[:, :1], y=train_data[:, 1:2], c=train_target)
-    plt.plot(np.array([0, 1]), np.array([(-bias) / weight[1], (-weight[0] - bias) / weight[1]]))
-    plt.show()
-
-
-# classifyTrain()
 
 yPredTrain = PerceptronAlgo(epochs, weight, bias, eta, train_data, train_target)
 
