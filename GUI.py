@@ -1,14 +1,4 @@
 import os
-import sys
-import json
-import numpy as np
-import pandas as pd
-import random
-import matplotlib.pyplot as plt 
-import seaborn as sns
-from sklearn.model_selection import train_test_split
-from sklearn.preprocessing import LabelEncoder
-from sklearn import preprocessing
 import tkinter as tk
 from tkinter import ttk
 from tkinter import messagebox
