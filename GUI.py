@@ -4,6 +4,12 @@ from tkinter import Canvas
 from tkinter import messagebox
 from tkinter import ttk
 
+
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,NavigationToolbar2Tk)
+from matplotlib.figure import Figure
+import Model
+import numpy as np
+
 import preReq
 
 # Input Part
@@ -65,7 +71,7 @@ ebochs.place(x=200, y=300)
 CheckBias = tk.IntVar()
 Bias = tk.Checkbutton(Top, text="Bias", variable=CheckBias, onvalue=1, offvalue=0, font=('Verdana', 20, 'bold'),
                       foreground="Orange")
-Bias.place(x=50, y=360)
+Bias.place(x=50, y=340)
 
 
 def PredictFn():
@@ -91,11 +97,11 @@ def ExitFn():
 
 
 ExitBTN = tk.Button(Top, text="Exit", font=('Verdana', 15, 'bold'), bg="red", foreground="yellow", command=ExitFn)
-ExitBTN.place(x=90, y=430)
+ExitBTN.place(x=90, y=400)
 
 PredictBTN = tk.Button(Top, text="Run", font=('Verdana', 15, 'bold'), bg="green", foreground="yellow",
                        command=PredictFn)
-PredictBTN.place(x=210, y=430)
+PredictBTN.place(x=210, y=400)
 
 canvas = Canvas(Top, width=5, height=500)
 for x in range(5):
@@ -174,10 +180,10 @@ Bias = tk.Checkbutton(Top, text="Bias", variable=CheckBias, onvalue=1, offvalue=
 if preReq.INarr[6]:
     Bias.select()
 Bias.configure(state='disabled')
-Bias.place(x=50, y=360)
+Bias.place(x=50, y=340)
 
 ExitBTN = tk.Button(Top, text="Exit", font=('Verdana', 15, 'bold'), bg="red", foreground="yellow", command=ExitFn)
-ExitBTN.place(x=150, y=430)
+ExitBTN.place(x=150, y=400)
 
 canvas = Canvas(Top, width=5, height=500)
 for x in range(5):
@@ -185,57 +191,70 @@ for x in range(5):
 canvas.place(x=380, y=0)
 
 pClass_lbl = tk.Label(Top, text='Predicted :', font=('Verdana', 12), foreground="orange")
-pClass_lbl.place(x=400, y=100)
+pClass_lbl.place(x=420, y=60)
 
 pClass = tk.Entry(Top, font=('Verdana', 12), foreground="green", width=10)
 pClass.configure(state='normal')
 pClass.insert('end', preReq.OUTarr[0])
 pClass.configure(state='disabled')
-pClass.place(x=500, y=100)
+pClass.place(x=520, y=60)
 
 trainAcc_lbl = tk.Label(Top, text='Train Acc :', font=('Verdana', 12), foreground="orange")
-trainAcc_lbl.place(x=400, y=160)
+trainAcc_lbl.place(x=650, y=60)
 
 trainAcc = tk.Entry(Top, font=('Verdana', 12), foreground="green", width=10)
 trainAcc.configure(state='normal')
 trainAcc.insert('end', (preReq.OUTarr[1], '%'))
 trainAcc.configure(state='disabled')
-trainAcc.place(x=500, y=160)
+trainAcc.place(x=750, y=60)
 
 testAcc_lbl = tk.Label(Top, text='Test  Acc : ', font=('Verdana', 12), foreground="orange")
-testAcc_lbl.place(x=400, y=200)
+testAcc_lbl.place(x=650, y=100)
 
 testAcc = tk.Entry(Top, font=('Verdana', 12), foreground="green", width=10)
 testAcc.configure(state='normal')
 testAcc.insert('end', (preReq.OUTarr[2], '%'))
 testAcc.configure(state='disabled')
-testAcc.place(x=500, y=200)
+testAcc.place(x=750, y=100)
 
 confMat_lbl = tk.Label(Top, text='Confusion\nMatrix', font=('Verdana', 12), foreground="orange")
-confMat_lbl.place(x=400, y=260)
+confMat_lbl.place(x=420, y=100)
 
 confMat0 = tk.Entry(Top, font=('Verdana', 12), foreground="green", width=4)
 confMat0.configure(state='normal')
 confMat0.insert('end', (preReq.OUTarr[3][0]))
 confMat0.configure(state='disabled')
-confMat0.place(x=500, y=260)
+confMat0.place(x=510, y=100)
 
 confMat1 = tk.Entry(Top, font=('Verdana', 12), foreground="green", width=4)
 confMat1.configure(state='normal')
 confMat1.insert('end', (preReq.OUTarr[3][1]))
 confMat1.configure(state='disabled')
-confMat1.place(x=545, y=260)
+confMat1.place(x=550, y=100)
 
 confMat2 = tk.Entry(Top, font=('Verdana', 12), foreground="green", width=4)
 confMat2.configure(state='normal')
 confMat2.insert('end', (preReq.OUTarr[3][2]))
 confMat2.configure(state='disabled')
-confMat2.place(x=500, y=280)
+confMat2.place(x=510, y=120)
 
 confMat3 = tk.Entry(Top, font=('Verdana', 12), foreground="green", width=4)
 confMat3.configure(state='normal')
 confMat3.insert('end', (preReq.OUTarr[3][3]))
 confMat3.configure(state='disabled')
-confMat3.place(x=545, y=280)
+confMat3.place(x=550, y=120)
+
+
+f = Figure(figsize=(3,3), dpi=100)
+a = f.add_subplot(111)
+a.scatter(x=Model.train_data[:, :1], y=Model.train_data[:, 1:2], c=Model.train_target)
+a.plot(np.array([0, 1]), np.array([(-Model.bias) / Model.weight[1], (-Model.weight[0] - Model.bias) / Model.weight[1]]))
+canvas = FigureCanvasTkAgg(f,master=Top)
+canvas.draw()
+canvas.get_tk_widget().pack()
+toolbar = NavigationToolbar2Tk(canvas,Top)
+toolbar.update()
+canvas._tkcanvas.place(x= 530 ,y =160)
+
 
 Top.mainloop()
