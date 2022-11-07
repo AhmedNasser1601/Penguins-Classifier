@@ -1,4 +1,3 @@
-import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
 from sklearn import preprocessing
@@ -21,6 +20,8 @@ bias = np.random.randn() if preReq.INarr[6] else 0
 
 # Visualizations
 def visualizeData(scaled_df):  # 10 combs
+    import matplotlib.pyplot as plt
+
     for i in range(len(preReq.Features) - 1):
         for j in range(i + 1, len(preReq.Features)):
             fL1, fL2 = preReq.Features[i], preReq.Features[j]
@@ -38,7 +39,6 @@ def visualizeData(scaled_df):  # 10 combs
 
 
 visualizeData(scaled_df)
-
 
 # Main
 
