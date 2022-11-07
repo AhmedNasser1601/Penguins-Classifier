@@ -4,10 +4,10 @@ from tkinter import Canvas
 from tkinter import messagebox
 from tkinter import ttk
 
-
-from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg,NavigationToolbar2Tk)
-from matplotlib.figure import Figure
 import numpy as np
+from matplotlib.backends.backend_tkagg import (FigureCanvasTkAgg, NavigationToolbar2Tk)
+from matplotlib.figure import Figure
+
 import Model
 import preReq
 
@@ -243,18 +243,16 @@ confMat3.insert('end', (preReq.OUTarr[3][3]))
 confMat3.configure(state='disabled')
 confMat3.place(x=580, y=120)
 
-
-f = Figure(figsize=(3,3), dpi=100)
+f = Figure(figsize=(3, 3), dpi=100)
 a = f.add_subplot(111)
 a.scatter(x=Model.train_data[:, :1], y=Model.train_data[:, 1:2], c=Model.train_target)
 a.plot(np.array([0, 1]), np.array([(-Model.bias) / Model.weight[1], (-Model.weight[0] - Model.bias) / Model.weight[1]]))
 
-canvas = FigureCanvasTkAgg(f,master=Top)
+canvas = FigureCanvasTkAgg(f, master=Top)
 canvas.draw()
 canvas.get_tk_widget().pack()
-toolbar = NavigationToolbar2Tk(canvas,Top)
+toolbar = NavigationToolbar2Tk(canvas, Top)
 toolbar.update()
-canvas._tkcanvas.place(x= 530 ,y =160)
-
+canvas._tkcanvas.place(x=530, y=160)
 
 Top.mainloop()
