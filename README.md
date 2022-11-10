@@ -1,5 +1,5 @@
 > 
-> | ***BIO9*** | <a href="https://github.com/AhmedNasser1601/Penguins-Classifier">***Penguins Classifier Perceptron***</a> |
+> | ***BIO9*** | <a href="https://github.com/AhmedNasser1601/Penguins-Classifier">***Penguins Classifier***</a> |
 > | :-: | :-: |
 
 > ***Tasks Delivery State***
