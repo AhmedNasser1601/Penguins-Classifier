@@ -1,18 +1,8 @@
 > 
-> | ***BIO9*** | <a href="https://github.com/AhmedNasser1601/Penguins-Classifier-Perceptron">***Penguins Classifier Perceptron***</a> |
+> | ***BIO9*** | ***1st Task*** |
 > | :-: | :-: |
-
-> ***Tasks Delivery State***
->> | <li>[x] <a href="1st Task">***1st***</a></li> | <li>[ ] <a href="2nd Task">***2nd***</a></li> | <li>[ ] <a href="3rd Task">***3rd***</a></li> |
->> | :-: | :-: | :-: |
-
-> ***Team Members***
->> | <a href="https://github.com/AhmedNasser1601">***Ahmed***</a> | <a href="https://github.com/YossefEFM">***Yossef***</a> | <a href="https://github.com/dohaabdelfatah">***Doha***</a> | <a href="https://github.com/mohamedKhaledBio">***Mohamed***</a> | <a href="https://github.com/abdelrahman-sedeek">***Abdelrahman***</a> |
->> | :-: | :-: | :-: | :-: | :-: |
-
----
-
-> <img src="DEMO.png">
 
 > | <a href="Model.ipynb">***Model***</a> | <a href="GUI.ipynb">***GUI***</a> | <a href="penguins.csv">***Dataset***</a> | <a href="***Task Description.pdf">***Description***</a> |
 > | :-: | :-: | :-: | :-: |
+
+> <img src="DEMO.png">
