@@ -3,7 +3,7 @@
 > | :-: | :-: |
 
 > ***Tasks Delivery State***
->> | <li>[x] <a href="1st Task">***1st***</a></li> | <li>[ ] <a href="2nd Task">***2nd***</a></li> | <li>[ ] <a href="3rd Task">***3rd***</a></li> |
+>> | <li>[x] <a href="Single Layer Perceptron">***1st***</a></li> | <li>[ ] <a href="2nd Task">***2nd***</a></li> | <li>[ ] <a href="3rd Task">***3rd***</a></li> |
 >> | :-: | :-: | :-: |
 
 > ***Team Members***
