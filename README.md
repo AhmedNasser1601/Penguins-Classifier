@@ -3,7 +3,7 @@
 > | :-: | :-: |
 
 > ***Tasks Delivery State***
->> | <li>[x] <a href="Single Layer Perceptron">***1st***</a></li> | <li>[ ] <a href="2nd Task">***2nd***</a></li> | <li>[ ] <a href="3rd Task">***3rd***</a></li> |
+>> | <li>[x] <a href="Single Layer Perceptron">***1st***</a></li> | <li>[ ] <a href="Adaline Algorithm">***2nd***</a></li> | <li>[ ] <a href="Back Propagation Multilayer">***3rd***</a></li> |
 >> | :-: | :-: | :-: |
 
 > ***Team Members***
@@ -12,7 +12,7 @@
 
 ---
 
-> <img src="DEMO.png">
+> <img src="Single Layer Perceptron/DEMO.png">
 
 > | <a href="Model.ipynb">***Model***</a> | <a href="GUI.ipynb">***GUI***</a> | <a href="penguins.csv">***Dataset***</a> | <a href="***Task Description.pdf">***Description***</a> |
 > | :-: | :-: | :-: | :-: |
