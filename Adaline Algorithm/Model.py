@@ -1,9 +1,3 @@
-#!/usr/bin/env python
-# coding: utf-8
-
-# In[1]:
-
-
 import matplotlib.pyplot as plt
 import numpy as np
 import pandas as pd
@@ -13,21 +7,17 @@ from sklearn.preprocessing import LabelEncoder
 import preReq
 
 
-# In[2]:
 
 
 df = pd.read_csv('penguins.csv')
 
 
-# In[3]:
 
 
 df['gender'] = LabelEncoder().fit_transform(df['gender'])
 scaled_df = pd.DataFrame(preprocessing.MinMaxScaler().fit_transform(df.iloc[:, 1:]), columns=df.iloc[:, 1:].columns)
 scaled_df['species'] = df['species']
 
-
-# In[4]:
 
 
 selectedF = (preReq.INarr[0], preReq.INarr[1])
@@ -39,10 +29,8 @@ bias = np.random.randn() if preReq.INarr[6] else 0
 MeanS= preReq.INarr[7]
 
 
-# ---
 # # Visualizations
 
-# In[5]:
 
 
 def visualizeData(scaled_df):  # 10 combs
@@ -65,10 +53,8 @@ def visualizeData(scaled_df):  # 10 combs
 # visualizeData(scaled_df)
 
 
-# ---
 # # Main
 
-# In[6]:
 
 
 misClass = list()
@@ -82,15 +68,11 @@ for x in preReq.Features:
         misFeatures.append(x)
 
 
-# In[7]:
-
 
 scaled_df.drop(scaled_df.index[(scaled_df["species"] == misClass[0])], axis=0, inplace=True)
 scaled_df.drop(columns=misFeatures, axis=1, inplace=True)
 scaled_df['species'] = scaled_df['species'].replace(selectedC, [1, -1])
 
-
-# In[8]:
 
 
 C1, C2 = (scaled_df[:50]).sample(frac=1), (scaled_df[50:100]).sample(frac=1)
@@ -103,25 +85,8 @@ train_data, train_target = all_train_data[:, :2], all_train_data[:, 2:]
 test_data, test_target = all_test_data[:, :2], all_test_data[:, 2:]
 
 
-# In[9]:
 
-
-def CalculateMSE(input, actual_output, weight, bias):
-    square_error = list()
-    prediction = input.dot(weight.transpose()) + bias
-
-    for i in range(len(actual_output)):
-        error = np.square(actual_output[i] - prediction[i])
-        square_error.append(error)
-    MSE =  (1/len(square_error)) * (sum(square_error)/2)
-
-    return MSE
-
-
-# In[10]:
-
-
-def PerceptronAlgo(epochs, weight, bias, eta, train_data, train_target):
+def AdalineAlgo(epochs, weight, bias, eta, train_data, train_target,MeanS):
     import numpy as np
 
     for epoch in range(epochs):
@@ -132,31 +97,34 @@ def PerceptronAlgo(epochs, weight, bias, eta, train_data, train_target):
                 weight += (eta * loss * train_data[i])
                 if bias!=0:
                     bias = bias+(eta * loss)
-        MSE = CalculateMSE(train_data,train_target,weight,bias)
-        if MSE < MeanS:
+        square_error = list()
+        prediction = train_data.dot(weight.transpose()) + bias
+        for i in range(len(train_target)):
+            error = np.square(train_target[i] - prediction[i])
+            square_error.append(error)
+        MSE =  (1/len(square_error)) * (sum(square_error)/2)
+        if MSE < float(MeanS):
             return yPredTrain
     return yPredTrain
 
-yPredTrain = PerceptronAlgo(epochs, weight, bias, eta, train_data, train_target)
+yPredTrain = AdalineAlgo(epochs, weight, bias, eta, train_data, train_target,MeanS)
 
 
-# In[11]:
 
 
 def classifyTrain():
+    import matblotlip as plt
     plt.figure("Trained Features Figure")
     plt.scatter(x=train_data[:, :1], y=train_data[:, 1:2], c=train_target)
     plt.plot(np.array([0, 1]), np.array([(-bias) / weight[1], (-weight[0] - bias) / weight[1]]))
     plt.show()
 
 
-classifyTrain()
+#classifyTrain()
 
 
-# ---
 # # Testing
 
-# In[12]:
 
 
 trainpred = train_data.dot(weight.transpose()) + bias
@@ -166,7 +134,6 @@ testpred = test_data.dot(weight.transpose()) + bias
 yPredTest = np.where(testpred>0, 1, -1)
 
 
-# In[13]:
 
 
 def ConfuionMatrix(target, yPred):
@@ -198,8 +165,6 @@ def ConfuionMatrix(target, yPred):
                                                                                 columns=['Real', 'Pred', 'Match'])
 
 
-# In[14]:
-
 
 preReq.OUTarr[1], confMatTrain, truthValsTrain = ConfuionMatrix(train_target, yPredTrain)
 print('|> Truth Values for Training <|\n   Training Accuracy: ', preReq.OUTarr[1], '%\n', truthValsTrain, '\n',
@@ -209,7 +174,6 @@ preReq.OUTarr[2], confMatTest, truthValsTest = ConfuionMatrix(test_target, yPred
 print('|> Truth Values for Testing <|\n   Testing Accuracy: ', preReq.OUTarr[2], '%\n', truthValsTest, '\n', '-' * 35)
 
 
-# In[15]:
 
 
 preReq.OUTarr[0] = selectedC[0] if sum(yPredTest) else selectedC[1]
