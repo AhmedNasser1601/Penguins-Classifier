@@ -3,7 +3,7 @@
 > | :-: | :-: |
 
 > ***Tasks Delivery State***
->> | <li>[x] <a href="Single Layer Perceptron">***1st***</a></li> | <li>[ ] <a href="Adaline Algorithm">***2nd***</a></li> | <li>[ ] <a href="Back Propagation Multilayer">***3rd***</a></li> |
+>> | <li>[x] <a href="Single Layer Perceptron">***1st***</a></li> | <li>[x] <a href="Adaline Algorithm">***2nd***</a></li> | <li>[ ] <a href="Back Propagation Multilayer">***3rd***</a></li> |
 >> | :-: | :-: | :-: |
 
 > ***Team Members***
