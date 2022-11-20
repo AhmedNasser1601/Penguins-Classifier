@@ -1,6 +1,6 @@
 > 
-> | ***BIO9*** | <a href="https://github.com/AhmedNasser1601/Penguins-Classifier">***Penguins Classifier***</a> |
-> | :-: | :-: |
+> | ***BIO9*** | <a href="https://github.com/AhmedNasser1601/Penguins-Classifier">***Penguins Classifier***</a> | [![HitCount](https://hits.dwyl.com/AhmedNasser1601/Penguins-Classifier.svg?style=flat-square)](http://hits.dwyl.com/AhmedNasser1601/Penguins-Classifier) |
+> | :-: | :-: | :-: |
 
 > ***Tasks Delivery State***
 >> | <li>[x] <a href="Single Layer Perceptron">***1st***</a></li> | <li>[x] <a href="Adaline Algorithm">***2nd***</a></li> | <li>[ ] <a href="Back Propagation Multilayer">***3rd***</a></li> |
