@@ -1,4 +1,13 @@
+#!/usr/bin/env python
+# coding: utf-8
+
+# In[1]:
+
+
 import numpy as np
+
+
+# In[2]:
 
 
 def activation(val, activeFn):
@@ -6,6 +15,9 @@ def activation(val, activeFn):
         return 1/(1 + np.exp(-val))
     else:
         return np.tanh(val)
+
+
+# In[3]:
 
 
 def BackPropagationAlgo(inN, outN, weights, activeFn, epochs, eta, layers, nn, bias):
@@ -45,3 +57,4 @@ def BackPropagationAlgo(inN, outN, weights, activeFn, epochs, eta, layers, nn, b
                 weights[layer] += (eta * inNew)
             
     return weights
+
