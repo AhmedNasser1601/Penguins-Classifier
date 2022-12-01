@@ -19,6 +19,6 @@
 
 > | ***Used Algorithm*** | DEMO |
 > | :-: | :-: |
-> | ***Single Layer Perceptron*** | <img src="Single Layer Perceptron/DEMO.png" height=400> |
-> | ***Adaline Algorithm*** | <img src="Adaline Algorithm/DEMO.png" height=400> |
-> | ***Back Propagation Multilayer*** | <img src="Back Propagation Multilayer/DEMO.png" height=400> |
+> | <a href="Single Layer Perceptron">***Single Layer Perceptron***</a> | <img src="Single Layer Perceptron/DEMO.png" height=400> |
+> | <a href="Adaline Algorithm">***Adaline Algorithm***</a> | <img src="Adaline Algorithm/DEMO.png" height=400> |
+> | <a href="Back Propagation Multilayer">***Back Propagation Multilayer***</a> | <img src="Back Propagation Multilayer/DEMO.png" height=400> |
