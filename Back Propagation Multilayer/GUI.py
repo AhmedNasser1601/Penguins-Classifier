@@ -1,18 +1,14 @@
 import numpy as np
 import pandas as pd
-
 from tkinter import *
 from tkinter import ttk
 from tkinter import messagebox
 import tkinter.font as tkFont
-
 from sklearn import preprocessing
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
-
 from Model import *
-
 
 
 def genLblTxt(text):
@@ -21,6 +17,7 @@ def genLblTxt(text):
     Label(Top, textvariable=lbl).pack(padx=5, pady=5)
     txt.pack(padx=5, pady=5)
     return txt
+
 
 def getter():
     return (
@@ -64,7 +61,6 @@ def startModel():
     weights.append(np.random.randn(nn[-1], 3))
     
     predOut = BackPropagationFn(inTrain, inTest, outTrain, weights, activeFn, epochs, eta, layers, nn, bias)
-    
     return predOut[0], outTrain, predOut[1], outTest
 
 
@@ -75,13 +71,12 @@ def RunProgram():
             break
     else:
         print('>>>  ', getter(), '  <<<')
-        predTrain, outTrain, predTest, outTest = startModel()
+        predTrain, targetTrain, predTest, targetTest = startModel()
         print('\n  >> Evaluate Training <<')
-        ConfusionMatrixFn(outTrain, predTrain)
+        ConfusionMatrixFn(targetTrain, predTrain)
         print('\n  >> Evaluate Testing <<')
-        ConfusionMatrixFn(outTest, predTest)
+        ConfusionMatrixFn(targetTest, predTest)
         print('_'*75)
-
 
 
 Top = Tk()
