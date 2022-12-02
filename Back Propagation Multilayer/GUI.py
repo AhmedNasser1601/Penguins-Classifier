@@ -8,6 +8,7 @@ from sklearn import preprocessing
 from sklearn.preprocessing import LabelEncoder
 from sklearn.preprocessing import OneHotEncoder
 from sklearn.compose import ColumnTransformer
+
 from Model import *
 
 
@@ -69,14 +70,13 @@ def RunProgram():
         if txtEnt[i].get() in ('', 'Activation Function >>'):
             messagebox.showerror(title="error", message="Insert the missing inputs", parent=Top)
             break
-    else:
-        print('>>>  ', getter(), '  <<<')
-        predTrain, targetTrain, predTest, targetTest = startModel()
-        print('\n  >> Evaluate Training <<')
-        ConfusionMatrixFn(targetTrain, predTrain)
-        print('\n  >> Evaluate Testing <<')
-        ConfusionMatrixFn(targetTest, predTest)
-        print('_'*75)
+    print('>>>  ', getter(), '  <<<')
+    predTrain, targetTrain, predTest, targetTest = startModel()
+    print('\n  >> Evaluate Training <<')
+    ConfusionMatrixFn(targetTrain, predTrain)
+    print('\n  >> Evaluate Testing <<')
+    ConfusionMatrixFn(targetTest, predTest)
+    print('_'*75)
 
 
 Top = Tk()
