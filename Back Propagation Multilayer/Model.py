@@ -4,66 +4,48 @@ import warnings
 
 
 def activationFn(val, activeFn):
-    if activeFn == 'Sigmoid':
-        warnings.filterwarnings('ignore')
-        return 1/(1 + np.exp(-val))
-    else:
-        warnings.filterwarnings('ignore')
-        return np.tanh(val)
+    warnings.filterwarnings('ignore')
+    if activeFn == 'Sigmoid': return 1/(1+np.exp(-val))
+    else: return np.tanh(val)
 
 
 def BackPropagationFn(inTrain, inTest, outTrain, weights, activeFn, epochs, eta, layers, nn, bias):
-    neurons = list()
+    neurons, outPred = list(), list()
     for n in nn:
         neurons.append(np.zeros(n))
     neurons.append(np.zeros(3))
-    holder = neurons
-    final = neurons
+    holder, final = neurons, neurons
     
     for epoch in range(epochs):
         for itr in range(len(inTrain)):
-            for layer in range(layers+1):  #Feed Forward
-                if layer == 0:
-                    neurons[0] = activationFn(inTrain[itr].dot(weights[0]), activeFn)
-                    continue
+            neurons[0] = activationFn(inTrain[itr].dot(weights[0]), activeFn)
+            for layer in range(1, layers+1):  #Feed Forward
                 neurons[layer] = activationFn(neurons[layer-1].dot(weights[layer]), activeFn)
             for n in range(len(neurons)-1):
                 neurons[n][0] = bias
             
-            for layer in range(layers, -1, -1):  #Back Propagate
-                goBack = neurons[layer] * (1-neurons[layer])
-                if layer == layers:
-                    err = outTrain[itr] - neurons[-1]
-                    holder[layer] = err * goBack
-                    continue
-                holder[layer] = goBack * (holder[layer+1].dot(weights[layer+1].transpose()))
+            holder[layers] = (outTrain[itr]-neurons[-1]) * (neurons[layers]*(1-neurons[layers]))
+            for layer in range(layers-1, -1, -1):  #Back Propagate
+                holder[layer] = (neurons[layer]*(1-neurons[layer])) * (holder[layer+1].dot(weights[layer+1].transpose()))
             
-            for layer in range(layers+1):  #Update Weights
+            (x, y) = weights[0].shape
+            weights[0] += (eta * (inTrain[itr].reshape(x, 1).dot(holder[0].reshape(1, y))))
+            for layer in range(1, layers+1):  #Update Weights
                 (x, y) = weights[layer].shape
-                if layer == 0:
-                    inNew = inTrain[itr].reshape(x, 1).dot(holder[0].reshape(1, y))
-                    weights[layer] += (eta * inNew)
-                    continue
-                inNew = neurons[layer-1].reshape(x, 1).dot(holder[layer].reshape(1, y))
-                weights[layer] += (eta * inNew)
+                weights[layer] += (eta * (neurons[layer-1].reshape(x, 1).dot(holder[layer].reshape(1, y))))
     
-    outPred = list()
     for input in (inTrain, inTest):
         fOut = list()
-        for i in range(len(input)):
-            for layer in range(layers+1):  #Feed Forward
-                if layer == 0:
-                    final[layer] = activationFn(input[i].dot(weights[layer]), activeFn)
-                    continue
+        for itr in range(len(input)):
+            final[0] = activationFn(input[itr].dot(weights[0]), activeFn)
+            for layer in range(1, layers+1):  #Feed Forward
                 final[layer] = activationFn(final[layer-1].dot(weights[layer]), activeFn)
             for n in range(len(final)-1):
                 final[n][0] = bias
             fOut.append(final[-1])
-
         for y in fOut:
-            maximum = np.argmax(y)
             for idx in range(len(y)):
-                y[idx] = 1 if idx==maximum else 0
+                y[idx] = 1 if idx==np.argmax(y) else 0
         outPred.append(fOut)
     return outPred
 
@@ -84,12 +66,9 @@ def ConfusionMatrixFn(target, predOut):
     
     truthVals = truthVals.append(pd.DataFrame(case, columns=['Pred', 'Real', 'Match']), ignore_index=True)
     
-    print(
-        '    Overall Acc: %{0:.2f}'.format((np.trace(confMat)/np.sum(confMat))*100),
-        '\n\n', truthVals,
-        '\n\n', '-----> Confusion Matrix <-----\n',
-        pd.DataFrame(confMat, columns=['C1', 'C2', 'C3'], index=['C1', 'C2', 'C3']), '\n'
-    )
+    print('    Overall Acc: %{0:.2f}'.format((np.trace(confMat)/np.sum(confMat))*100),
+          '\n\n', truthVals, '\n\n', '-----> Confusion Matrix <-----\n',
+          pd.DataFrame(confMat, columns=['C1', 'C2', 'C3'], index=['C1', 'C2', 'C3']), '\n')
 
     for i in range(len(classes)):
         print('{}: %{}'.format(classes[i], ((confMat[i][i]/(len(target)/len(classes)))*100)))
