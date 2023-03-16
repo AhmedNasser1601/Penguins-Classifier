@@ -32,7 +32,7 @@ def getter():
 
 
 def startModel():
-    df = pd.read_csv('penguins.csv')
+    df = pd.read_csv('../penguins.csv')
     df['gender'] = LabelEncoder().fit_transform(df['gender'])    
     df = pd.DataFrame(ColumnTransformer([(df.columns[0], OneHotEncoder(),
                         [df.columns.get_loc(df.columns[0])])],
