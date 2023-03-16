@@ -5,7 +5,7 @@ from sklearn.preprocessing import LabelEncoder
 
 import preReq
 
-df = pd.read_csv('penguins.csv')
+df = pd.read_csv('../penguins.csv')
 df['gender'] = LabelEncoder().fit_transform(df['gender'])
 scaled_df = pd.DataFrame(preprocessing.MinMaxScaler().fit_transform(df.iloc[:, 1:]), columns=df.iloc[:, 1:].columns)
 scaled_df['species'] = df['species']
