@@ -1,4 +1,4 @@
-> | ***BIO9*** | <a href="https://github.com/AhmedNasser1601/Penguins-Classifier">***Penguins Classifier***</a> | ![HitCount](https://hits.dwyl.com/AhmedNasser1601/Penguins-Classifier.svg?style=flat-square) |
+> | ***BIO9*** | <a href="https://github.com/AhmedNasser1601/Penguins-Classifier">***Penguins Classifier***</a> | ![Visits](https://hits.sh/github.com/AhmedNasser1601/Penguins-Classifier.svg?label=Visits&logo=python) |
 > | :-: | :-: | :-: |
 
 > ***Tasks Delivery State***
