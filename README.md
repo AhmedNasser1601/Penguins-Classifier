@@ -1,5 +1,4 @@
-| ***BIO9*** | <a href="https://github.com/AhmedNasser1601/Penguins-Classifier">***Penguins Classifier***</a> | <img src="https://hits.sh/github.com/AhmedNasser1601/Penguins-Classifier.svg?label=Visits&logo=python"/> |
-| :-: | :-: | :-: |
+<table align="center"><tr><td><b>BIO9</b></td><td><a href="Penguins Classifier"><b>Penguins Classifier</b></a></td><td><img src="https://hits.sh/github.com/AhmedNasser1601/Penguins-Classifier.svg?label=Visits&logo=python"/></td></tr></table>
 
 | X1-X2<img src="Visualizations/X1-X2.png"> | X1-X3<img src="Visualizations/X1-X3.png"> | X1-X4<img src="Visualizations/X1-X4.png"> | X1-X5<img src="Visualizations/X1-X5.png"> | X2-X3<img src="Visualizations/X2-X3.png"> |
 | :-: | :-: | :-: | :-: | :-: |
